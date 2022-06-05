@@ -6,6 +6,11 @@ const useStyles = makeStyles({
     '& a': '#FFFFF4',
     marginLeft: 10,
   },
+  brand: {
+    fontWeight: 'bold',
+    fontSize: '1.5rem',
+    color: '#FFFFF4',
+  },
   main: {
     minHeight: '80vh',
   },
