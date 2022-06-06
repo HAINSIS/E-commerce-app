@@ -13,8 +13,10 @@ import Image from 'next/image';
 import Layout from '../components/Layout';
 import styles from '../styles/Home.module.css';
 import data from '../utils/data';
+import useStyles from '../utils/style';
 
 export default function Home() {
+  const classes = useStyles();
   return (
     <Layout>
       <div>
@@ -22,9 +24,10 @@ export default function Home() {
         <Grid container spacing={3}>
           {data.products.map((product) => (
             <Grid item md={4} key={product.name}>
-              <Card>
-                <CardActionArea>
+              <Card className={classes.card}>
+                <CardActionArea className={classes.media}>
                   <CardMedia
+                    className={classes.media}
                     component="img"
                     image={product.image}
                     title={product.name}
@@ -33,12 +36,15 @@ export default function Home() {
                     <Typography>{product.name}</Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardActions>
-                  <Typography>${product.price}</Typography>
+                <CardActions className={classes.price}>
+                  <Typography>Price : ${product.price}</Typography>
                   <Typography>
                     {product.shipping == 0 ? '' : 'Shipping cost :'}
+
                     {product.shipping == 0 ? 'Free shipping' : product.shipping}
                   </Typography>
+                </CardActions>
+                <CardActions className={classes.addtocart}>
                   <Button size="small" color="primary">
                     Add to cart
                   </Button>

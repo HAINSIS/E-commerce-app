@@ -24,6 +24,15 @@ export default function Layout({ children }) {
               <Typography className={classes.brand}>Bleu Horizon</Typography>
             </Link>
           </NextLink>
+          <div className={classes.grow}></div>
+          <div>
+            <NextLink href="/cart" passHref>
+              <Link style={{ textDecoration: 'none' }}>Cart</Link>
+            </NextLink>
+            <NextLink href="/Login" passHref>
+              <Link style={{ textDecoration: 'none' }}>Login</Link>
+            </NextLink>
+          </div>
         </Toolbar>
       </AppBar>
       <Container className={classes.main}>{children}</Container>
