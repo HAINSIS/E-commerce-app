@@ -23,20 +23,24 @@ const useStyles = makeStyles({
     textAlign: 'center',
   },
   card: {
-    display: 'block',
     width: 400,
     height: 650,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
   },
   media: {
     display: 'flex',
     height: 500,
     Width: '100%',
     objectFit: 'contain',
+    flexDirection: 'column',
     justifyContent: 'center',
   },
   price: {
     display: 'flex',
     justifyContent: 'space-between',
+    margin: 4,
   },
   addtocart: {
     justifyContent: 'center',

@@ -14,6 +14,7 @@ import Layout from '../components/Layout';
 import styles from '../styles/Home.module.css';
 import data from '../utils/data';
 import useStyles from '../utils/style';
+import NextLink from 'next/link';
 
 export default function Home() {
   const classes = useStyles();
@@ -25,17 +26,19 @@ export default function Home() {
           {data.products.map((product) => (
             <Grid item md={4} key={product.name}>
               <Card className={classes.card}>
-                <CardActionArea className={classes.media}>
-                  <CardMedia
-                    className={classes.media}
-                    component="img"
-                    image={product.image}
-                    title={product.name}
-                  ></CardMedia>
-                  <CardContent>
-                    <Typography>{product.name}</Typography>
-                  </CardContent>
-                </CardActionArea>
+                <NextLink href={`/product/${product.ref}`} passHref>
+                  <CardActionArea className={classes.media}>
+                    <CardMedia
+                      className={classes.media}
+                      component="img"
+                      image={product.image}
+                      title={product.name}
+                    ></CardMedia>
+                    <CardContent>
+                      <Typography>{product.name}</Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </NextLink>
                 <CardActions className={classes.price}>
                   <Typography>Price : ${product.price}</Typography>
                   <Typography>
