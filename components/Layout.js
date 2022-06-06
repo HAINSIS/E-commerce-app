@@ -10,12 +10,12 @@ import React from 'react';
 import useStyles from '../utils/style';
 import NextLink from 'next/link';
 
-export default function Layout({ children }) {
+export default function Layout({ title, children }) {
   const classes = useStyles();
   return (
     <div>
       <Head>
-        <title>Bleu Horizon</title>
+        <title>{title ? `${title} - Bleu Horizon` : `Bleu Horizon`}</title>
       </Head>
       <AppBar position="static" className={classes.navebar}>
         <Toolbar>

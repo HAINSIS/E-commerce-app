@@ -23,15 +23,15 @@ const useStyles = makeStyles({
     textAlign: 'center',
   },
   card: {
-    width: 400,
-    height: 650,
+    width: 300,
+    height: 550,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
   },
   media: {
     display: 'flex',
-    height: 500,
+    height: 400,
     Width: '100%',
     objectFit: 'contain',
     flexDirection: 'column',
@@ -44,6 +44,20 @@ const useStyles = makeStyles({
   },
   addtocart: {
     justifyContent: 'center',
+  },
+  container: {
+    margin: 10,
+  },
+  categories: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginLeft: 20,
+  },
+  categoriesbox: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
   },
 });
 
