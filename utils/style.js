@@ -52,12 +52,43 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    marginLeft: 20,
+    textDecoration: 'none',
   },
   categoriesbox: {
     display: 'flex',
-    justifyContent: 'space-between',
     width: '100%',
+    '& h4': {
+      flexBasis: '30%',
+    },
+  },
+  description: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignContent: 'flex-start',
+    '& h3': {
+      alignSelf: 'start',
+    },
+  },
+  otherdetails: {
+    display: 'flex',
+    flexDirection: 'column',
+    '& div': {
+      display: 'flex',
+      width: '100%',
+      alignItems: 'baseline',
+      '& h4': {
+        flexBasis: '30%',
+      },
+    },
+  },
+  pricebox: {
+    '& h4': {
+      flexBasis: '30%',
+    },
+    '& h5': {
+      color: '#e06b1f',
+      fontSize: 20,
+    },
   },
 });
 

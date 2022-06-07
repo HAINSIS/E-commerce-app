@@ -23,37 +23,65 @@ export default function ProductDetails() {
         </NextLink>
       </div>
       <Grid container spacing={1}>
-        <Grid item md={6} xs={12}>
+        <Grid item md={5} xs={12}>
           <Image
             src={product.image}
             alt={product.name}
-            width={650}
-            height={650}
+            width={450}
+            height={450}
+            objectFit={'contain'}
             layout="responsive"
           ></Image>
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={4} xs={12}>
           <List>
+            <ListItem>
+              <h1>{product.name}</h1>
+            </ListItem>
+            <ListItem className={classes.pricebox}>
+              <h4>Price :</h4>
+              <h5>${product.price}</h5>
+            </ListItem>
+            <ListItem>
+              {product.shipping == 0
+                ? 'Free shipping'
+                : `$${product.shipping} - Shipping & Import Fees `}{' '}
+            </ListItem>
+            <ListItem>
+              <h4>Rating : </h4> {product.rating} <h4>Reviews : </h4>
+              {product.numReviews}
+            </ListItem>
             <ListItem className={classes.categoriesbox}>
-              <div>Categories :</div>
+              <h4>Categories :</h4>
               <div className={classes.categories}>
                 {product.category.map((x) => (
-                  <button>{x.name}</button>
+                  <NextLink key={x.name} href={'/'} passHref>
+                    <Link>{x.name}</Link>
+                  </NextLink>
                 ))}
               </div>
             </ListItem>
-            <ListItem>
-              Manufacturer :
-              <NextLink href={'/'} passHref>
-                <Link>{product.manufacturer}</Link>
-              </NextLink>
+            <ListItem className={classes.otherdetails}>
+              <div>
+                <h4>Manufacturer :</h4>
+                <NextLink href={'/'} passHref>
+                  <Link>{product.manufacturer}</Link>
+                </NextLink>
+              </div>
+              <div>
+                <h4>Type :</h4>
+                <NextLink href={'/'} passHref>
+                  <Link>{product.type}</Link>
+                </NextLink>
+              </div>
+              <div>
+                <h4>Stock :</h4> {product.countInStock}
+              </div>
             </ListItem>
-            <ListItem>Type : {product.type}</ListItem>
-            <ListItem>Stock : {product.countInStock}</ListItem>
-            <ListItem>
-              A Tottal of {product.numReviews} Rated : {product.rating}
+            <ListItem className={classes.description}>
+              <h3>About this item</h3>
+              <p>{product.description}</p>
             </ListItem>
-            <ListItem>{product.description}</ListItem>
             <ListItem>Happy shopping</ListItem>
           </List>
         </Grid>
