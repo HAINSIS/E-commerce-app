@@ -25,33 +25,39 @@ export default function Home() {
         <Grid container spacing={3}>
           {data.products.map((product) => (
             <Grid item md={4} key={product.name}>
-              <Card className={classes.card}>
+              <Card key={product.name} className={classes.card}>
                 <NextLink href={`/product/${product.ref}`} passHref>
-                  <CardActionArea className={classes.media}>
+                  <CardActionArea textAlign="center" flexDirection="column">
                     <CardMedia
                       className={classes.media}
                       component="img"
                       image={product.image}
+                      alt={product.name}
                       title={product.name}
-                    ></CardMedia>
+                      objectFit="contain"
+                    />
                     <CardContent>
-                      <Typography>{product.name}</Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {product.name}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <CardActions className={classes.price}>
+                          <Typography
+                            display="flex"
+                            className={classes.cardprice}
+                          >
+                            <a1 color="#e06b1f">${product.price}</a1>
+                            <a>
+                              {product.shipping == 0
+                                ? 'Free shipping'
+                                : ` + $${product.shipping} - Shipping & Import Fees `}
+                            </a>
+                          </Typography>
+                        </CardActions>
+                      </Typography>
                     </CardContent>
                   </CardActionArea>
                 </NextLink>
-                <CardActions className={classes.price}>
-                  <Typography>Price : ${product.price}</Typography>
-                  <Typography>
-                    {product.shipping == 0 ? '' : 'Shipping cost :'}
-
-                    {product.shipping == 0 ? 'Free shipping' : product.shipping}
-                  </Typography>
-                </CardActions>
-                <CardActions className={classes.addtocart}>
-                  <Button size="small" color="primary">
-                    Add to cart
-                  </Button>
-                </CardActions>
               </Card>
             </Grid>
           ))}

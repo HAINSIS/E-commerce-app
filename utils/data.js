@@ -31,7 +31,7 @@ const data = {
         'http://img.bbystatic.com/BestBuy_US/images/products/4390/43900_sa.jpg',
       rating: 4.5,
       numReviews: 10,
-      countInStock: 20,
+      countInStock: 0,
     },
     {
       ref: 48530,

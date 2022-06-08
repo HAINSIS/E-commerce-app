@@ -1,6 +1,9 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
+  page: {
+    backgroundColor: 'beige',
+  },
   navebar: {
     backgroundColor: '#1979C2',
     '& a': {
@@ -20,22 +23,36 @@ const useStyles = makeStyles({
     minHeight: '80vh',
   },
   footer: {
+    marginTop: 20,
     textAlign: 'center',
+    backgroundColor: '#FFFFFF',
+    height: 50,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cards: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
   },
   card: {
     width: 300,
-    height: 550,
+    height: 600,
+    padding: 10,
+    margin: 5,
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
+    '& image': {
+      objectFit: 'contain',
+    },
   },
   media: {
     display: 'flex',
-    height: 400,
-    Width: '100%',
+    height: '60%',
+    Width: '90%',
     objectFit: 'contain',
     flexDirection: 'column',
     justifyContent: 'center',
+    alignSelf: 'center',
   },
   price: {
     display: 'flex',
@@ -53,6 +70,9 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     justifyContent: 'space-between',
     textDecoration: 'none',
+    '& Link': {
+      textDecoration: 'none',
+    },
   },
   categoriesbox: {
     display: 'flex',
@@ -82,13 +102,34 @@ const useStyles = makeStyles({
     },
   },
   pricebox: {
+    display: 'flex',
+    alignItems: 'center',
     '& h4': {
       flexBasis: '30%',
+      alignSelf: 'center',
     },
     '& h5': {
       color: '#e06b1f',
       fontSize: 20,
     },
+  },
+  cardprice: {
+    '& a1': {
+      color: '#e06b1f',
+      fontSize: 20,
+    },
+    '& a': {
+      color: 'grey',
+      fontSize: 15,
+    },
+  },
+  stockempty: {
+    color: '#fa2505',
+    fontSize: 20,
+  },
+  stockfull: {
+    color: '#12ed70',
+    fontSize: 20,
   },
 });
 

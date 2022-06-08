@@ -13,7 +13,7 @@ import NextLink from 'next/link';
 export default function Layout({ title, children }) {
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.page}>
       <Head>
         <title>{title ? `${title} - Bleu Horizon` : `Bleu Horizon`}</title>
       </Head>
