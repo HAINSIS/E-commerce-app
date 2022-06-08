@@ -8,10 +8,9 @@ import {
   Grid,
   Typography,
 } from '@material-ui/core';
-import Head from 'next/head';
-import Image from 'next/image';
+
 import Layout from '../components/Layout';
-import styles from '../styles/Home.module.css';
+
 import data from '../utils/data';
 import useStyles from '../utils/style';
 import NextLink from 'next/link';

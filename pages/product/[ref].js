@@ -76,7 +76,7 @@ export default function ProductDetails() {
             <ListItem className={classes.otherdetails}>
               <div>
                 <h4>Manufacturer :</h4>
-                <NextLink href={'/'} passHref>
+                <NextLink href={`/${product.manufacturer}`} passHref>
                   <Link>{product.manufacturer}</Link>
                 </NextLink>
               </div>
