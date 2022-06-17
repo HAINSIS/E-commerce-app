@@ -25,7 +25,6 @@ const useStyles = makeStyles({
   footer: {
     marginTop: 20,
     textAlign: 'center',
-    backgroundColor: '#FFFFFF',
     height: 50,
     display: 'flex',
     alignItems: 'center',
