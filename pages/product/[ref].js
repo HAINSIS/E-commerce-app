@@ -31,7 +31,7 @@ export default function ProductDetails() {
     <Layout title={product.name}>
       <div className={classes.container}>
         <NextLink href={'/'} passHref>
-          <Link>Go back to the Products list</Link>
+          <Link> {'> Home'} </Link>
         </NextLink>
       </div>
       <Grid container spacing={1}>
@@ -48,7 +48,9 @@ export default function ProductDetails() {
         <Grid item md={4} xs={12}>
           <List>
             <ListItem>
-              <h1>{product.name}</h1>
+              <Typography component="h1" variant="h1">
+                {product.name}
+              </Typography>
             </ListItem>
             <ListItem className={classes.pricebox}>
               <h4>Price :</h4>

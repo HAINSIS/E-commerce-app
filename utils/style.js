@@ -1,9 +1,9 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
-  page: {
-    backgroundColor: 'beige',
-  },
+  //page: {
+  //  backgroundColor: 'beige',
+  //},
   navebar: {
     backgroundColor: '#1979C2',
     '& a': {

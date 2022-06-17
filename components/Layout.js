@@ -1,44 +1,90 @@
 import {
   AppBar,
   Container,
+  CssBaseline,
   Link,
+  ThemeProvider,
   Toolbar,
   Typography,
+  createMuiTheme,
+  Switch,
 } from '@material-ui/core';
 import Head from 'next/head';
-import React from 'react';
+import React, { useContext } from 'react';
 import useStyles from '../utils/style';
 import NextLink from 'next/link';
+import { DarkMode } from '../utils/DarkMode';
+import Cookies from 'js-cookie';
 
 export default function Layout({ title, children }) {
+  const { state, dispatch } = useContext(DarkMode);
+  const { darkMode } = state;
+  const theme = createMuiTheme({
+    typography: {
+      h1: {
+        fontSize: '1.6rem',
+        fontWeight: 400,
+        margin: '1rem 0',
+      },
+      h2: {
+        fontSize: '1.4rem',
+        fontWeight: 400,
+        margin: '1rem 0',
+      },
+    },
+    palette: {
+      type: darkMode ? 'dark' : 'light',
+
+      primary: {
+        main: '#2A94E4',
+      },
+      secondary: {
+        main: '#C26219',
+      },
+    },
+  });
   const classes = useStyles();
+  const darkModeChangeHandler = () => {
+    dispatch({ type: darkMode ? 'DARK_MODE_OFF' : 'DARK_MODE_ON' });
+    const cookiesDarkMode = !darkMode;
+    Cookies.set('darkMode', cookiesDarkMode ? 'ON' : 'OFF');
+  };
+
   return (
-    <div className={classes.page}>
+    <div>
       <Head>
         <title>{title ? `${title} - Bleu Horizon` : `Bleu Horizon`}</title>
       </Head>
-      <AppBar position="static" className={classes.navebar}>
-        <Toolbar>
-          <NextLink href="/" passHref>
-            <Link style={{ textDecoration: 'none' }}>
-              <Typography className={classes.brand}>Bleu Horizon</Typography>
-            </Link>
-          </NextLink>
-          <div className={classes.grow}></div>
-          <div>
-            <NextLink href="/cart" passHref>
-              <Link style={{ textDecoration: 'none' }}>Cart</Link>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AppBar position="static" className={classes.navebar}>
+          <Toolbar>
+            <NextLink href="/" passHref>
+              <Link style={{ textDecoration: 'none' }}>
+                <Typography className={classes.brand}>Bleu Horizon</Typography>
+              </Link>
             </NextLink>
-            <NextLink href="/Login" passHref>
-              <Link style={{ textDecoration: 'none' }}>Login</Link>
-            </NextLink>
-          </div>
-        </Toolbar>
-      </AppBar>
-      <Container className={classes.main}>{children}</Container>
-      <footer className={classes.footer}>
-        all right reserved. Blue Horizon
-      </footer>
+            <div className={classes.grow}></div>
+            <div>
+              <Switch
+                checked={darkMode}
+                onChange={darkModeChangeHandler}
+                title="Dark Mode"
+              ></Switch>
+              <NextLink href="/cart" passHref>
+                <Link style={{ textDecoration: 'none' }}>Cart</Link>
+              </NextLink>
+              <NextLink href="/Login" passHref>
+                <Link style={{ textDecoration: 'none' }}>Login</Link>
+              </NextLink>
+            </div>
+          </Toolbar>
+        </AppBar>
+        <Container className={classes.main}>{children}</Container>
+        <footer className={classes.footer}>
+          all right reserved. Blue Horizon
+        </footer>
+      </ThemeProvider>
     </div>
   );
 }
