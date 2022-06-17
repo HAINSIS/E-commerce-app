@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import '../styles/globals.css';
-import { DarkModeProvider } from '../utils/DarkMode';
+import { DarkModeProvider } from '../utils/darkMode';
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {

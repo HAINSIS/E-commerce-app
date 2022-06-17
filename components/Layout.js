@@ -13,7 +13,7 @@ import Head from 'next/head';
 import React, { useContext } from 'react';
 import useStyles from '../utils/style';
 import NextLink from 'next/link';
-import { DarkMode } from '../utils/DarkMode';
+import { DarkMode } from '../utils/darkMode';
 import Cookies from 'js-cookie';
 
 export default function Layout({ title, children }) {
