@@ -35,18 +35,22 @@ const useStyles = makeStyles({
     justifyContent: 'space-evenly',
   },
   card: {
-    width: 300,
-    height: 600,
+    width: 200,
+    height: 400,
     padding: 10,
     margin: 5,
     display: 'flex',
     '& image': {
       objectFit: 'contain',
     },
+    objectFit: 'contain',
+  },
+  cardName: {
+    fontSize: '1rem',
   },
   media: {
     display: 'flex',
-    height: '60%',
+    height: '50%',
     Width: '90%',
     objectFit: 'contain',
     flexDirection: 'column',

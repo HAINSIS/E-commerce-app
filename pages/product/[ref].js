@@ -25,7 +25,11 @@ export default function ProductDetails() {
   const classes = useStyles();
   const product = data.products.find((a) => a.ref === parseInt(ref, 10));
   if (!product) {
-    return <div>Product Not Found</div>;
+    return (
+      <div>
+        <h1>Product Not Found</h1>
+      </div>
+    );
   }
   return (
     <Layout title={product.name}>
@@ -69,7 +73,7 @@ export default function ProductDetails() {
               <h4>Categories :</h4>
               <div className={classes.categories}>
                 {product.category.map((x) => (
-                  <NextLink key={x.name} href={'/'} passHref>
+                  <NextLink key={x.name} href={`/category/${x.name}`} passHref>
                     <Link>{x.name}</Link>
                   </NextLink>
                 ))}
@@ -78,13 +82,16 @@ export default function ProductDetails() {
             <ListItem className={classes.otherdetails}>
               <div>
                 <h4>Manufacturer :</h4>
-                <NextLink href={`/${product.manufacturer}`} passHref>
+                <NextLink
+                  href={`/manufacturer/${product.manufacturer}`}
+                  passHref
+                >
                   <Link>{product.manufacturer}</Link>
                 </NextLink>
               </div>
               <div>
                 <h4>Type :</h4>
-                <NextLink href={'/'} passHref>
+                <NextLink href={`/type/${product.type}`} passHref>
                   <Link>{product.type}</Link>
                 </NextLink>
               </div>
@@ -144,7 +151,11 @@ export default function ProductDetails() {
             .map((product) => (
               <Card key={product.name} className={classes.card}>
                 <NextLink href={`/product/${product.ref}`} passHref>
-                  <CardActionArea textAlign="center" flexDirection="column">
+                  <CardActionArea
+                    textAlign="center"
+                    flexDirection="column"
+                    title={product.name}
+                  >
                     <CardMedia
                       className={classes.media}
                       component="img"
@@ -153,8 +164,15 @@ export default function ProductDetails() {
                       title={product.name}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        {product.name}
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                        className={classes.cardName}
+                      >
+                        {product.name.length > 50
+                          ? `${product.name.substring(0, 50)}...`
+                          : product.name}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         <CardActions className={classes.price}>

@@ -16,16 +16,28 @@ import NextLink from 'next/link';
 
 export default function Home() {
   const classes = useStyles();
+
+  // var names = data.products.map((product) => product.name.length);
+  /*  for (const name of names) {
+    const shortName = name.substring(0, 43);
+
+    console.log(shortName);
+  }*/
+  // console.log(names);
   return (
     <Layout>
       <div>
         <h1>Products</h1>
         <Grid container spacing={3}>
           {data.products.map((product) => (
-            <Grid item md={4} key={product.name}>
+            <Grid item key={product.name}>
               <Card key={product.name} className={classes.card}>
                 <NextLink href={`/product/${product.ref}`} passHref>
-                  <CardActionArea textAlign="center" flexDirection="column">
+                  <CardActionArea
+                    textAlign="center"
+                    flexDirection="column"
+                    title={product.name}
+                  >
                     <CardMedia
                       className={classes.media}
                       component="img"
@@ -35,8 +47,16 @@ export default function Home() {
                       objectFit="contain"
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        {product.name}
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                        className={classes.cardName}
+                        title={product.name}
+                      >
+                        {product.name.length > 50
+                          ? `${product.name.substring(0, 50)}...`
+                          : product.name}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         <CardActions className={classes.price}>
@@ -47,7 +67,7 @@ export default function Home() {
                             <a1 color="#e06b1f">${product.price}</a1>
                             <a>
                               {product.shipping == 0
-                                ? 'Free shipping'
+                                ? '  Free shipping'
                                 : ` + $${product.shipping} - Shipping & Import Fees `}
                             </a>
                           </Typography>
