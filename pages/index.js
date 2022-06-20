@@ -10,26 +10,21 @@ import {
 
 import Layout from '../components/Layout';
 
-import data from '../utils/data';
+//import data from '../utils/data';
 import useStyles from '../utils/style';
 import NextLink from 'next/link';
+import db from '../utils/db';
+import Product from '../models/Product';
 
-export default function Home() {
+export default function Home(props) {
+  const { products } = props;
   const classes = useStyles();
-
-  // var names = data.products.map((product) => product.name.length);
-  /*  for (const name of names) {
-    const shortName = name.substring(0, 43);
-
-    console.log(shortName);
-  }*/
-  // console.log(names);
   return (
     <Layout>
       <div>
         <h1>Products</h1>
         <Grid container spacing={3}>
-          {data.products.map((product) => (
+          {products.map((product) => (
             <Grid item key={product.name}>
               <Card key={product.name} className={classes.card}>
                 <NextLink href={`/product/${product.ref}`} passHref>
@@ -83,4 +78,15 @@ export default function Home() {
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  await db.connect();
+  const products = await Product.find({}).lean();
+  await db.disconnect();
+  return {
+    props: {
+      products: products.map(db.convertDocToObject),
+    },
+  };
 }
