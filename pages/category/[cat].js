@@ -9,18 +9,18 @@ import {
   Link,
 } from '@material-ui/core';
 import { useRouter } from 'next/router';
-
 import Layout from '../../components/Layout';
-
-import data from '../../utils/data';
 import useStyles from '../../utils/style';
 import NextLink from 'next/link';
+import db from '../../utils/db';
+import Product from '../../models/Product';
 
-export default function ProductsByCategory() {
+export default function ProductsByCategory(props) {
+  const { products } = props;
   const classes = useStyles();
   const router = useRouter();
   const { cat } = router.query;
-  const productCategory = data.products.map((x) =>
+  const productCategory = products.map((x) =>
     x.category.find((y) => y.name === cat)
   );
   // checking if the result of find is all undefined
@@ -44,7 +44,7 @@ export default function ProductsByCategory() {
         </NextLink>
         <h1> {cat} :</h1>
         <Grid container spacing={3}>
-          {data.products
+          {products
             .filter((x) => x.category.find((y) => y.name === cat))
             .map((product) => (
               <Grid item key={product.name}>
@@ -100,4 +100,15 @@ export default function ProductsByCategory() {
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  await db.connect();
+  const products = await Product.find({}).lean();
+  await db.disconnect();
+  return {
+    props: {
+      products: products.map(db.convertDocToObject),
+    },
+  };
 }

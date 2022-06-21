@@ -1,5 +1,4 @@
 import React from 'react';
-import data from '../../utils/data';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import NextLink from 'next/link';
@@ -18,12 +17,16 @@ import {
 } from '@material-ui/core';
 import useStyles from '../../utils/style';
 import Image from 'next/image';
+import db from '../../utils/db';
+import Product from '../../models/Product';
 
-export default function ProductDetails() {
+export default function ProductDetails(props) {
+  const { products } = props;
   const router = useRouter();
   const { ref } = router.query;
+  const product = products.find((a) => a.ref === parseInt(ref, 10));
   const classes = useStyles();
-  const product = data.products.find((a) => a.ref === parseInt(ref, 10));
+
   if (!product) {
     return (
       <div>
@@ -60,11 +63,7 @@ export default function ProductDetails() {
               <h4>Price :</h4>
               <h5>${product.price}</h5>
             </ListItem>
-            <ListItem>
-              {product.shipping == 0
-                ? 'Free shipping'
-                : `+ $${product.shipping} - Shipping & Import Fees `}{' '}
-            </ListItem>
+
             <ListItem className={classes.categoriesbox}>
               <h4>Rating : </h4> {product.rating} Stars ({product.numReviews}{' '}
               Reviews)
@@ -146,7 +145,7 @@ export default function ProductDetails() {
           <h2>More from {product.manufacturer} : </h2>
         </Grid>
         <Grid container spacing={3} className={classes.cards}>
-          {data.products
+          {products
             .filter((x) => x.manufacturer == `${product.manufacturer}`)
             .map((product) => (
               <Card key={product.name} className={classes.card}>
@@ -198,4 +197,15 @@ export default function ProductDetails() {
       </Grid>
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  await db.connect();
+  const products = await Product.find({}).lean();
+  await db.disconnect();
+  return {
+    props: {
+      products: products.map(db.convertDocToObject),
+    },
+  };
 }
