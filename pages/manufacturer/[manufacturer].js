@@ -8,7 +8,6 @@ import {
   Typography,
   Link,
 } from '@material-ui/core';
-import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import useStyles from '../../utils/style';
 import NextLink from 'next/link';
@@ -16,12 +15,10 @@ import db from '../../utils/db';
 import Product from '../../models/Product';
 
 export default function ProductsByManufacturer(props) {
-  const classes = useStyles();
-  const router = useRouter();
   const { products } = props;
-  const { manufacturer } = router.query;
+  const { manufacturer } = props;
+  const classes = useStyles();
   const product = products.find((a) => a.manufacturer === manufacturer);
-  console.log(product);
   if (!product) {
     return <div>Manufacturer Not found</div>;
   }
@@ -91,13 +88,17 @@ export default function ProductsByManufacturer(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { manufacturer } = params;
   await db.connect();
   const products = await Product.find({}).lean();
+
   await db.disconnect();
   return {
     props: {
       products: products.map(db.convertDocToObject),
+      manufacturer: manufacturer,
     },
   };
 }

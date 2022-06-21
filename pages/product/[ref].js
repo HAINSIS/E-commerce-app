@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+//import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import NextLink from 'next/link';
 import {
@@ -22,9 +22,11 @@ import Product from '../../models/Product';
 
 export default function ProductDetails(props) {
   const { products } = props;
-  const router = useRouter();
-  const { ref } = router.query;
-  const product = products.find((a) => a.ref === parseInt(ref, 10));
+  const { product } = props;
+
+  //const router = useRouter();
+  //const { ref } = router.query;
+  //const product = products.find((a) => a.ref === parseInt(ref, 10));
   const classes = useStyles();
 
   if (!product) {
@@ -199,13 +201,18 @@ export default function ProductDetails(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { ref } = params;
   await db.connect();
   const products = await Product.find({}).lean();
+  const product = await Product.findOne({ ref }).lean();
+
   await db.disconnect();
   return {
     props: {
       products: products.map(db.convertDocToObject),
+      product: db.convertDocToObject(product),
     },
   };
 }

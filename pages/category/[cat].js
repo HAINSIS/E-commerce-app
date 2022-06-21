@@ -8,7 +8,6 @@ import {
   Typography,
   Link,
 } from '@material-ui/core';
-import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import useStyles from '../../utils/style';
 import NextLink from 'next/link';
@@ -17,11 +16,10 @@ import Product from '../../models/Product';
 
 export default function ProductsByCategory(props) {
   const { products } = props;
+  const { category } = props;
   const classes = useStyles();
-  const router = useRouter();
-  const { cat } = router.query;
   const productCategory = products.map((x) =>
-    x.category.find((y) => y.name === cat)
+    x.category.find((y) => y.name === category)
   );
   // checking if the result of find is all undefined
   function allUndefined(array) {
@@ -42,10 +40,10 @@ export default function ProductsByCategory(props) {
         <NextLink href={'/'} passHref>
           <Link>{'> Home'}</Link>
         </NextLink>
-        <h1> {cat} :</h1>
+        <h1> {category} :</h1>
         <Grid container spacing={3}>
           {products
-            .filter((x) => x.category.find((y) => y.name === cat))
+            .filter((x) => x.category.find((y) => y.name === category))
             .map((product) => (
               <Grid item key={product.name}>
                 <Card key={product.name} className={classes.card}>
@@ -102,13 +100,17 @@ export default function ProductsByCategory(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { cat } = params;
   await db.connect();
   const products = await Product.find({}).lean();
+
   await db.disconnect();
   return {
     props: {
       products: products.map(db.convertDocToObject),
+      category: cat,
     },
   };
 }
