@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import '../styles/globals.css';
-import { DarkModeProvider } from '../utils/darkMode';
+import { StoreProvider } from '../utils/Store';
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -10,9 +10,9 @@ function MyApp({ Component, pageProps }) {
     }
   }, []);
   return (
-    <DarkModeProvider>
+    <StoreProvider>
       <Component {...pageProps} />
-    </DarkModeProvider>
+    </StoreProvider>
   );
 }
 

@@ -8,19 +8,17 @@ import {
   Typography,
   Link,
 } from '@material-ui/core';
-import { useRouter } from 'next/router';
-
 import Layout from '../../components/Layout';
-
-import data from '../../utils/data';
 import useStyles from '../../utils/style';
 import NextLink from 'next/link';
+import db from '../../utils/db';
+import Product from '../../models/Product';
 
-export default function ProductsByType() {
+export default function ProductsByType(props) {
+  const { products } = props;
+  const { type } = props;
   const classes = useStyles();
-  const router = useRouter();
-  const { type } = router.query;
-  const product = data.products.find((a) => a.type === type);
+  const product = products.find((a) => a.type === type);
   console.log(product);
   if (!product) {
     return <div>type Not found</div>;
@@ -33,7 +31,7 @@ export default function ProductsByType() {
         </NextLink>
         <h1>All the {product.type} :</h1>
         <Grid container spacing={3}>
-          {data.products
+          {products
             .filter((x) => x.type == `${product.type}`)
             .map((product) => (
               <Grid item key={product.name}>
@@ -89,4 +87,19 @@ export default function ProductsByType() {
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { type } = params;
+  await db.connect();
+  const products = await Product.find({}).lean();
+
+  await db.disconnect();
+  return {
+    props: {
+      products: products.map(db.convertDocToObject),
+      type: type,
+    },
+  };
 }
