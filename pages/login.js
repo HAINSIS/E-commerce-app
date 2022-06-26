@@ -44,7 +44,7 @@ export default function Login() {
             </Button>
           </ListItem>
           <ListItem>
-            Don't you have an account?{' '}
+            {`Don't you have an account?  `}
             <NextLink href={'/register'} passHref>
               <Link color="secondary"> Register</Link>
             </NextLink>

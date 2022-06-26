@@ -1,5 +1,20 @@
-/*
+import bcrypt from 'bcryptjs';
+
 const data = {
+  users: [
+    {
+      name: 'oral',
+      email: 'oral@gmail.com',
+      password: bcrypt.hashSync('asid'),
+      isAdmin: true,
+    },
+    {
+      name: 'orby',
+      email: 'orby@gmail.com',
+      password: bcrypt.hashSync('asidby'),
+      isAdmin: false,
+    },
+  ],
   products: [
     {
       ref: 43900,
@@ -3101,5 +3116,3 @@ const data = {
 };
 
 export default data;
-
-*/
