@@ -6,7 +6,7 @@ import {
   ThemeProvider,
   Toolbar,
   Typography,
-  createMuiTheme,
+  createTheme,
   Switch,
   Badge,
 } from '@material-ui/core';
@@ -20,7 +20,7 @@ import Cookies from 'js-cookie';
 export default function Layout({ title, children }) {
   const { state, dispatch } = useContext(Store);
   const { darkMode, cart } = state;
-  const theme = createMuiTheme({
+  const theme = createTheme({
     typography: {
       h1: {
         fontSize: '1.6rem',
