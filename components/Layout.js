@@ -86,7 +86,7 @@ export default function Layout({ title, children }) {
                   )}
                 </Link>
               </NextLink>
-              <NextLink href="/Login" passHref>
+              <NextLink href="/login" passHref>
                 <Link style={{ textDecoration: 'none' }}>Login</Link>
               </NextLink>
             </div>

@@ -134,6 +134,10 @@ const useStyles = makeStyles({
     color: '#12ed70',
     fontSize: 20,
   },
+  form: {
+    maxWidth: 800,
+    margin: '0 auto',
+  },
 });
 
 export default useStyles;
